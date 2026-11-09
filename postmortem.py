@@ -1,4 +1,4 @@
-"""Gemma-written postmortems, saved as Markdown in ghosthunter/postmortems/."""
+"""Gemma-written postmortems, saved as Markdown in postmortems/."""
 import json, pathlib, re, time
 import model
 

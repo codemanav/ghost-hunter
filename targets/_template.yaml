@@ -2,7 +2,7 @@
 name: MyApp
 description: One or two sentences about the app; this is given to the model as context.
 compose:
-  dir: ../path/to/your/compose/project   # relative to ghosthunter/
+  dir: ../path/to/your/compose/project   # relative to the Ghost Hunter repo root
   env: {}                                 # extra env vars for `docker compose` (e.g. passwords)
 
 services:                                 # what gets health-checked

@@ -5,13 +5,13 @@ Thanks for helping hunt ghosts! Small, focused pull requests are easiest to revi
 ## Setup
 
 ```bash
-cd ghosthunter
 python3 -m venv .venv && .venv/bin/python -m pip install -r requirements-dev.txt
 .venv/bin/python -m pytest -q tests          # unit tests: no Docker or API key needed
 ```
 
-For end-to-end work you also need Docker, the EcoCycle demo app (`DB_PASSWORD=ecocycle docker compose up -d`
-from the repo root), and either a `GEMINI_API_KEY` in `ghosthunter/.env` or Ollama with `gemma4:e4b`.
+For end-to-end work you also need Docker, the EcoCycle demo app
+(`cd examples/ecocycle && DB_PASSWORD=ecocycle docker compose up -d --build`), and either a `GEMINI_API_KEY`
+in `.env` or Ollama with `gemma4:e4b`.
 
 ## Common contributions
 

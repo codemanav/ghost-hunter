@@ -4,7 +4,7 @@ name: EcoCycle
 description: >
   Circular-economy marketplace. Three Spring Boot services, each with its own Postgres, behind nginx.
 compose:
-  dir: ..                       # relative to this file's parent (ghosthunter/); where docker-compose.yml lives
+  dir: examples/ecocycle        # relative to the repo root; where docker-compose.yml lives
   env: {DB_PASSWORD: ecocycle}
 
 # Services Ghost Hunter health-checks. depends_on = containers whose logs are pulled when this service is DOWN.

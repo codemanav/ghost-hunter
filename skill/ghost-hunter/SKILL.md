@@ -9,16 +9,16 @@ Ghost Hunter investigates a failing docker-compose app (health checks, container
 restart counts, filtered error logs, optional metrics chart), asks Gemma 4 for the root cause and a
 remediation, checks that remediation against an allowlist, applies it, and verifies with real requests.
 
-The CLI lives at `ghosthunter/ghosthunter` in this repository. Always pass `--json` so output is parseable.
+The CLI is `./ghosthunter` at the root of the Ghost Hunter repository. Always pass `--json` so output is parseable.
 
 ## Workflow
 
-1. **Check health.** `ghosthunter/ghosthunter --json status`. Exit code 0 means healthy; stop there.
-2. **Diagnose without changing anything.** `ghosthunter/ghosthunter --json recover --dry-run`.
+1. **Check health.** `./ghosthunter --json status`. Exit code 0 means healthy; stop there.
+2. **Diagnose without changing anything.** `./ghosthunter --json recover --dry-run`.
    Read `decision.root_cause`, `decision.evidence`, `decision.action`, `decision.params`, `allowed`.
 3. **Ask the user before acting** unless they already told you to fix it. Show them the root cause,
    the evidence lines, and the proposed action.
-4. **Recover.** `ghosthunter/ghosthunter --json recover --yes`. This acts, verifies with health checks
+4. **Recover.** `./ghosthunter --json recover --yes`. This acts, verifies with health checks
    and real requests, retries once with a new diagnosis if needed, and writes a postmortem.
    Exit code 0 = recovered and verified.
 5. **Report.** Summarise `outcome`, the action taken, and give the `postmortem` path.

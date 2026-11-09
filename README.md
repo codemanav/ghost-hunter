@@ -80,20 +80,21 @@ flowchart LR
 | [`cli.py`](cli.py) / [`ghosthunter`](ghosthunter) | CLI for humans, scripts and coding agents |
 | [`app.py`](app.py) | Streamlit UI |
 | [`targets/`](targets/) | Target definitions (EcoCycle + a template) |
+| [`examples/ecocycle/`](examples/ecocycle/) | The demo app: three Spring Boot services, three Postgres databases and an nginx frontend |
 
 ## Quick start
 
 Requirements: Docker, Python 3.11+, and a Gemini API key **or** Ollama.
 
 ```bash
-cd ghosthunter
+git clone https://github.com/codemanav/ghost-hunter.git && cd ghost-hunter
 python3 -m venv .venv && .venv/bin/python -m pip install -r requirements.txt
 echo "GEMINI_API_KEY=your-key" > .env      # git-ignored
 
-# start the demo app (EcoCycle) from the repo root
-(cd .. && DB_PASSWORD=ecocycle docker compose up -d)
+# start the demo app (EcoCycle); the first build compiles three Spring Boot services and takes a few minutes
+(cd examples/ecocycle && DB_PASSWORD=ecocycle docker compose up -d --build)
 
-./ghosthunter status
+./ghosthunter status                       # wait until all three services are 🟢 (about a minute)
 .venv/bin/python -m streamlit run app.py   # UI on http://localhost:8501
 ```
 
@@ -124,7 +125,8 @@ ollama pull gemma4:e4b                      # ~9.5 GB
 Scenario C matters: Gemma restarts only when restarting is actually right. Both backends get all three
 right; see [BENCHMARKS.md](BENCHMARKS.md).
 
-In the UI, turn on **🌙 Night watch**, click a ghost, and don't touch anything else.
+In the UI, either turn on **🌙 Night watch** in the sidebar, click a ghost and don't touch anything
+else, or leave night watch off, click a ghost, then click **🔦 Hunt now**.
 
 ## CLI
 
@@ -186,7 +188,7 @@ pick it up from the registry automatically.
 
 | Env var | Default | |
 |---|---|---|
-| `GEMINI_API_KEY` | | Gemini API key (or put it in `ghosthunter/.env`) |
+| `GEMINI_API_KEY` | | Gemini API key (or put it in `.env` at the repo root) |
 | `GHOSTHUNTER_MODEL_BACKEND` | `gemini` | `gemini` or `ollama` |
 | `GHOSTHUNTER_MODEL` | `gemma-4-26b-a4b-it` | Gemini API model |
 | `OLLAMA_MODEL` | `gemma4:e4b` | Local model |
@@ -219,4 +221,6 @@ Ghost Hunter is a Hacktoberfest project and contributions are welcome. See
 [CONTRIBUTING.md](CONTRIBUTING.md) and [GOOD_FIRST_ISSUES.md](GOOD_FIRST_ISSUES.md).
 
 ---
-GhostHunter was built at Hacktoberfest Hack Day Raleigh 2026. The demo app, EcoCycle, existed before the event;
+GhostHunter was built at Hacktoberfest Hack Day Raleigh 2026. The demo app, EcoCycle, existed before the event.
+EcoCycle was built by Manav Shah and Yuvraj Singh Bhatia; its full project, with CI/CD and infrastructure,
+lives at [codemanav/ecocycle-project-devOps](https://github.com/codemanav/ecocycle-project-devOps).
